@@ -1,0 +1,21 @@
+version: "2.4"
+services:
+  app:
+    container_name: notion-app
+    build: "./"
+    ports:
+      - ${PORT}:${PORT}
+    command: sh -c 'pm2 kill;pm2 start ecosystem.config.js --watch;pm2 logs'
+    volumes:
+      - .:/app:delegated
+
+  postgres:
+    image: postgres:16
+    ports:
+      - ${DB_EXT_PORT}:${DB_PORT}
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_MULTIPLE_DATABASES=test
+
