@@ -1,0 +1,140 @@
+swagger: '2.0'
+info:
+  title: Product API
+  version: 1.0.0
+basePath: /product
+tags:
+  - name: Products
+    description: Operations related to products
+paths:
+  /product:
+    post:
+      tags:
+        - Products
+      summary: Create a new product
+      parameters:
+        - name: body
+          in: body
+          description: Product object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/ProductInput'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProductResponse'
+    get:
+      tags:
+        - Products
+      summary: Get all products
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProductListResponse'
+
+  /product/{id}:
+    put:
+      tags:
+        - Products
+      summary: Update an existing product by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to update
+          required: true
+          type: integer
+        - name: body
+          in: body
+          description: Updated product object
+          required: true
+          schema:
+            $ref: '#/definitions/ProductInput'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProductResponse'
+    delete:
+      tags:
+        - Products
+      summary: Delete a product by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to delete
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProductResponse'
+    get:
+      tags:
+        - Products
+      summary: Get a product by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to retrieve
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProductResponse'
+
+definitions:
+  ProductInput:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      category:
+        type: string
+      price:
+        type: number
+    required:
+      - name
+      - description
+      - category
+      - price
+
+  ProductResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        default: true
+      product:
+        $ref: '#/definitions/Product'
+
+  ProductListResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        default: true
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+
+  Product:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      category:
+        type: string
+      price:
+        type: number

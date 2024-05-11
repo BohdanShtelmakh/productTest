@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   app:
-    container_name: notion-app
+    container_name: product-app
     build: "./"
     ports:
       - ${PORT}:${PORT}
