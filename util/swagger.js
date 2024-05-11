@@ -6,7 +6,7 @@ const swaggerSpec = swaggerJSDoc({
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'REST API DiFreight Chat',
+      title: 'REST API',
       version: '1.0.0'
     },
     components: {
